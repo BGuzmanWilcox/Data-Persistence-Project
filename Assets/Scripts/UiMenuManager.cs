@@ -16,6 +16,8 @@ public class UiMenuManager : MonoBehaviour
     public void StartButton()
     {
         SceneManager.LoadScene(1);
+
+        DataManager.Instance.LoadBestData();
     }
 
     public void QuitButton()
@@ -29,11 +31,11 @@ public class UiMenuManager : MonoBehaviour
 
     }
     
-    public void UserName()
+    public void ReadStringInput()
     {
         if (userName != null) 
         { 
-        DataManager.instance.SetUsername(userName.text);
+        DataManager.Instance.SetUsername(userName.text);
         }
     }
 }

@@ -25,8 +25,8 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        userName = DataManager.instance != null ? DataManager.instance.userName : "Unknown";
-        DisplayUser();
+        userName = DataManager.Instance != null ? DataManager.Instance.userName : "Unknown";
+        DisplayBestUser();
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -79,20 +79,20 @@ public class MainManager : MonoBehaviour
         GameOverText.SetActive(true);
 
         UpdateBestScore();
-        DisplayUser();
+        DisplayBestUser();
 
     }
 
     public void UpdateBestScore()
     {
-        if (DataManager.instance.highScore < m_Points)
+        if (DataManager.Instance.bestScore < m_Points)
         {
-            DataManager.instance.SaveBestData(userName, m_Points);  
+            DataManager.Instance.SaveBestData(userName, m_Points);  
         }
     }
 
-    private void DisplayUser()
+    private void DisplayBestUser()
     {
-        BestScore.text = "Best Score :" + DataManager.instance.userName + " : " + DataManager.instance.highScore;
+        BestScore.text = "Best Score :" + DataManager.Instance.bestUsername + " : " + DataManager.Instance.bestScore;
     }
 }

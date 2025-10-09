@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager instance;
+    public static DataManager Instance;
     public string userName;
-    public int highScore;
+    public string bestUsername;
+    public int bestScore;
 
     private void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
 
         }
 
-        instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -26,27 +27,31 @@ public class DataManager : MonoBehaviour
     {
         userName = username;
     }
+    public void SetBestUsername(string username)
+    {
+        bestUsername = username;
+    }
 
     public void SetBestScore(int score)
     {
-        highScore = score;
+        bestScore = score;
     }
 
     [System.Serializable]
     class SaveData
     {
-        public string userName;
+        public string bestUsername;
 
-        public int highScore;
+        public int bestScore;
     }
 
-    public void SaveBestData(string username, int highScore)
+    public void SaveBestData(string bestUser, int bestScore)
     {
         SaveData data = new SaveData();
 
-        data.userName = userName;
+        data.bestUsername = bestUser;
 
-        data.highScore = highScore;
+        data.bestScore = bestScore;
 
         string json = JsonUtility.ToJson(data);
 
@@ -64,9 +69,9 @@ public class DataManager : MonoBehaviour
 
             SaveData data =JsonUtility.FromJson<SaveData>(json);
 
-            userName = data.userName;
+            bestUsername = data.bestUsername;
 
-            highScore = data.highScore;
+            bestScore = data.bestScore;
         }
     }
 }
